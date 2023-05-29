@@ -9,4 +9,26 @@ class M_user extends CI_model {
         return $this->db->insert("tbl_users", $data);
 
     }
+
+    // fungsi cek login
+    function cek_login($username, $password) {
+        $this->db->select("*");
+        $this->db->from("tbl_users");
+        $this->db->where("username", $username);
+        $query = $this->db->get();
+        $user = $query->from();
+        /**
+         * Check password
+         */
+        if (!empty($user)) {
+            if (password_verify($password, $user->password)) {
+                return $query->result();
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
+        }
+
+    }
 }
