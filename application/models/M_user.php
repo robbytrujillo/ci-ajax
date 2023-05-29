@@ -11,12 +11,13 @@ class M_user extends CI_model {
     }
 
     // fungsi cek login
-    function cek_login($username, $password) {
+    function cek_login($username, $password)
+    {
         $this->db->select("*");
         $this->db->from("tbl_users");
         $this->db->where("username", $username);
         $query = $this->db->get();
-        $user = $query->from();
+        $user = $query->row();
         /**
          * Check password
          */
@@ -29,6 +30,6 @@ class M_user extends CI_model {
         } else {
             return FALSE;
         }
-
     }
+
 }
